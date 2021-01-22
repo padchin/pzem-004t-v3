@@ -4,10 +4,10 @@ import (
 	"fmt"
 	"time"
 
-	"github.com/be-ys/pzem-004t-v3/crc16"
+	"github.com/padchin/pzem-004t-v3/crc16"
 
 	"github.com/go-errors/errors"
-	"github.com/tarm/serial"
+	"github.com/padchin/serial"
 )
 
 type Register uint16

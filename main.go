@@ -5,7 +5,7 @@ import (
 	"os"
 	"time"
 
-	"github.com/be-ys/pzem-004t-v3/pzem"
+	"github.com/padchin/pzem-004t-v3/pzem"
 )
 
 const toPrint = `
