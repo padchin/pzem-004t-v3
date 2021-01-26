@@ -41,14 +41,14 @@ const (
 	//
 	////ReadHoldingRegister command
 	//ReadHoldingRegister Command = 0x03
-	//ReadInputRegister command
-	ReadInputRegister Command = 0x04
+	//READ_INPUT_REGISTER command
+	READ_INPUT_REGISTER Command = 0x04
 	//WRITE_SINGLE_REGISTER command
 	WRITE_SINGLE_REGISTER Command = 0x06
 	////Calibration command
 	//Calibration Command = 0x41
-	//ResetEnergy command
-	ResetEnergy Command = 0x42
+	//RESET_ENERGY command
+	RESET_ENERGY Command = 0x42
 
 	DEVICE_UPDATE_TIME             = 1000
 	DEVICE_DEFAULT_BAUD_RATE       = 9600
@@ -194,7 +194,7 @@ func (p *pzem) UpdateValues() error {
 	}
 
 	// Read 10 registers starting at 0x00 (no check)
-	if err := p.SendCommand(ReadInputRegister, 0x00, 0x0A, false); err != nil {
+	if err := p.SendCommand(READ_INPUT_REGISTER, 0x00, 0x0A, false); err != nil {
 		return err
 	}
 
@@ -295,7 +295,7 @@ func SetCRC(buf []uint8) {
 }
 
 func (p *pzem) ResetEnergy() error {
-	buffer := []uint8{0x00, uint8(ResetEnergy), 0x00, 0x00}
+	buffer := []uint8{0x00, uint8(RESET_ENERGY), 0x00, 0x00}
 	reply := make([]uint8, 4)
 	buffer[0] = p.addr
 
