@@ -55,7 +55,7 @@ const (
 	DEVICE_DEFAULT_ADDRESS   uint8 = 0xF8
 )
 
-//Probe is PZEM interface
+// Probe is PZEM interface
 type Probe interface {
 	Voltage() (float64, error)
 	Power() (float64, error)
@@ -71,6 +71,7 @@ type Config struct {
 	Port         string
 	Speed        int
 	SlaveAddress uint8
+	ReadTimeout  time.Duration
 }
 
 type pzem struct {
@@ -93,7 +94,7 @@ type pzem struct {
 //	fmt.Println()
 //}
 
-//Setup initialize new PZEM device
+// Setup initialize new PZEM device
 func Setup(config Config) (Probe, error) {
 
 	if config.Port == "" {
@@ -106,8 +107,7 @@ func Setup(config Config) (Probe, error) {
 	if config.SlaveAddress == 0 {
 		config.SlaveAddress = DEVICE_DEFAULT_ADDRESS
 	}
-
-	c := &serial.Config{Name: config.Port, Baud: config.Speed}
+	c := &serial.Config{Name: config.Port, Baud: config.Speed, ReadTimeout: config.ReadTimeout}
 	s, err := serial.OpenPort(c)
 	if err != nil {
 		return nil, err
